@@ -48,7 +48,7 @@ void Player::move(float offsetX, float offsetY)
 {
     if (playerForm)
     {
-        playerForm->move(offsetX * playerSpeed, offsetY * playerSpeed);
+        playerForm->move(offsetX, offsetY);
     }
 }
 
