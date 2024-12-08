@@ -1,11 +1,15 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
-
+#include "Player.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Matrix Wars", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Matrix Wars");
+
+    // Create the player shapes and the player
+    sf::CircleShape* playerShape = new sf::CircleShape(80, 4);
+    playerShape->setFillColor(sf::Color::Red);
+    playerShape->setPosition(sf::Vector2f(500, 500));
+
+    Player player(playerShape, 1, 10);
     
     while (window.isOpen())
     {
@@ -13,24 +17,25 @@ int main()
         
         while (window.pollEvent(event))
         {
-            switch (event.type)
+            if (event.type == sf::Event::Closed)
             {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-                case sf::Event::KeyPressed:
-                    if (event.key.code == sf::Keyboard::Escape)
-                    {
-                        window.close();
-                    }
-                    break;
-                default:
-                    break;
+                window.close();
+            }
+
+            if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                case sf::Keyboard::Z: player.move(0, -5); break;
+                case sf::Keyboard::S: player.move(0, 5);  break;
+                case sf::Keyboard::Q: player.move(-5, 0); break;
+                case sf::Keyboard::D: player.move(5, 0);  break;
+                case sf::Keyboard::Escape: window.close(); break;
+                default: break;
+                }
             }
         }
 
         window.clear();
-        
+        player.draw(window);
         window.display();
     }
 }
