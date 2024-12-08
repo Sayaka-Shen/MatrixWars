@@ -22,5 +22,5 @@ public:
 
     // Function to draw the form and to move the player
     void draw(sf::RenderWindow& window);
-    void move(float offsetX, float offsetY);
+    void move(float offsetX, float offsetY, float deltaTime);
 };

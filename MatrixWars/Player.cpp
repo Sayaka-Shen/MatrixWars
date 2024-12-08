@@ -44,11 +44,11 @@ void Player::draw(sf::RenderWindow& window)
     }
 }
 
-void Player::move(float offsetX, float offsetY)
+void Player::move(float offsetX, float offsetY, float deltaTime)
 {
     if (playerForm)
     {
-        playerForm->move(offsetX, offsetY);
+        playerForm->move(offsetX * playerSpeed * deltaTime, offsetY * playerSpeed * deltaTime);
     }
 }
 

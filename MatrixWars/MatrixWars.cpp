@@ -8,6 +8,8 @@ int main()
     sf::CircleShape* playerShape = new sf::CircleShape(80, 4);
     playerShape->setFillColor(sf::Color::Red);
     playerShape->setPosition(sf::Vector2f(500, 500));
+    playerShape->setOrigin(playerShape->getRadius(), playerShape->getRadius());
+    playerShape->setScale(0.5, 0.5);
 
     Player player(playerShape, 1, 100);
 
@@ -39,12 +41,32 @@ int main()
             offsetY /= length;
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) { offsetY -= 5.0f; }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { offsetY += 5.0f; }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) { offsetX -= 5.0f; }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { offsetX += 5.0f; }
-
-        player.move(offsetX * player.getSpeed() * deltaTime, offsetY * player.getSpeed() * deltaTime);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+        {
+            offsetY -= 5.0f;
+            player.getPlayerForm()->setRotation(-45);
+        }
+        else
+        {
+            player.getPlayerForm()->setRotation(0);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            offsetY += 5.0f;
+            player.getPlayerForm()->setRotation(45);
+        } 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+        {
+            offsetX -= 5.0f;
+            player.getPlayerForm()->setRotation(-45);
+        } 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            offsetX += 5.0f;
+            player.getPlayerForm()->setRotation(45);
+        }
+        
+        player.move(offsetX, offsetY, deltaTime);
 
         // Classic command
         window.clear();
