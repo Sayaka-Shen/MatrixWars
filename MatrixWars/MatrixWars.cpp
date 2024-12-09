@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "MathUtils.h"
 
 int main()
 {
@@ -7,11 +8,12 @@ int main()
     // Create the player shapes and the player
     sf::CircleShape* playerShape = new sf::CircleShape(80, 4);
     playerShape->setFillColor(sf::Color::Red);
-    playerShape->setPosition(sf::Vector2f(500, 500));
-    playerShape->setOrigin(playerShape->getRadius(), playerShape->getRadius());
+    playerShape->setPosition(sf::Vector2f(200, 200));
+    playerShape->setOrigin(playerShape->getRadius() / 2, playerShape->getRadius() / 2);
     playerShape->setScale(0.5, 0.5);
+    playerShape->setRotation(45);
 
-    Player player(playerShape, 1, 100);
+    Player player(playerShape, 1, 500);
 
     // Time management
     sf::Clock clock;
@@ -30,43 +32,26 @@ int main()
         
         // Movement Management 
         float deltaTime = clock.restart().asSeconds();
-
-        float offsetX = 0.0f;
-        float offsetY = 0.0f;
-
-        if (offsetX != 0 && offsetY != 0)
-        {
-            const float length = std::sqrt(offsetX * offsetX + offsetY * offsetY);
-            offsetX /= length;
-            offsetY /= length;
-        }
-
+        player.setDir({0, 0});
+        
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         {
-            offsetY -= 5.0f;
-            player.getPlayerForm()->setRotation(-45);
-        }
-        else
-        {
-            player.getPlayerForm()->setRotation(0);
+            player.setDir({0, -1});
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            offsetY += 5.0f;
-            player.getPlayerForm()->setRotation(45);
+            player.setDir({0, 1});
         } 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         {
-            offsetX -= 5.0f;
-            player.getPlayerForm()->setRotation(-45);
+            player.setDir({-1, 0});
         } 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            offsetX += 5.0f;
-            player.getPlayerForm()->setRotation(45);
+            player.setDir({1, 0});
         }
-        
-        player.move(offsetX, offsetY, deltaTime);
+
+        player.update(deltaTime);
 
         // Classic command
         window.clear();

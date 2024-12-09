@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 
 // Constructor
-Player::Player(sf::Shape* playerFORM, int playerID, float playerSPEED)
+Player::Player(sf::CircleShape* playerFORM, int playerID, float playerSPEED)
 {
     playerForm = playerFORM;
     playerId = playerID;
@@ -24,7 +24,7 @@ int Player::getId()
     return playerId;
 }
 
-sf::Shape* Player::getPlayerForm()
+sf::CircleShape* Player::getPlayerForm()
 {
     return playerForm;
 }
@@ -33,7 +33,6 @@ float Player::getSpeed()
 {
     return playerSpeed;
 }
-
 
 // Move and Draw Functions
 void Player::draw(sf::RenderWindow& window)
@@ -44,11 +43,33 @@ void Player::draw(sf::RenderWindow& window)
     }
 }
 
-void Player::move(float offsetX, float offsetY, float deltaTime)
+void Player::update(float deltaTime)
 {
-    if (playerForm)
+    playerForm->move(dir.x * getSpeed() * deltaTime, dir.y * getSpeed() * deltaTime);
+    
+    if (playerForm->getPosition().x < playerForm->getOrigin().x * playerForm->getScale().x)
     {
-        playerForm->move(offsetX * playerSpeed * deltaTime, offsetY * playerSpeed * deltaTime);
+        playerForm->setPosition(playerForm->getOrigin().x * playerForm->getScale().x, playerForm->getPosition().y);
     }
+    else if (playerForm->getPosition().x > 1900)
+    {
+        playerForm->setPosition(1900, playerForm->getPosition().y);
+    }
+
+    if (playerForm->getPosition().y < playerForm->getRadius() * playerForm->getScale().y / 2)
+    {
+        playerForm->setPosition(playerForm->getPosition().x, playerForm->getRadius() * playerForm->getScale().y / 2);
+    }
+    else if (playerForm->getPosition().y > 1080 - 40)
+    {
+        playerForm->setPosition(playerForm->getPosition().x, 1080 - 40);
+    }
+        
 }
+
+void Player::setDir(sf::Vector2f _dir)
+{
+    dir = _dir;
+}
+
 
