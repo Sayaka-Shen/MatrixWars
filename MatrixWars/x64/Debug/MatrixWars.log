@@ -1,0 +1,5 @@
+﻿  MatrixWars.cpp
+C:\repos\MatrixWars\MatrixWars\MatrixWars\MatrixWars.cpp(27,92): warning C4805: '==' : mélange risqué de type 'sf::Event::EventType' et de type 'bool' dans l'opération
+  Player.cpp
+  Génération de code en cours...
+  MatrixWars.vcxproj -> C:\repos\MatrixWars\MatrixWars\x64\Debug\MatrixWars.exe
