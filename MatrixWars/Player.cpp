@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 
 // Constructor
-Player::Player(sf::CircleShape* playerFORM, int playerID, float playerSPEED)
+Player::Player(sf::RectangleShape* playerFORM, int playerID, float playerSPEED)
 {
     playerForm = playerFORM;
     playerId = playerID;
@@ -24,7 +24,7 @@ int Player::getId()
     return playerId;
 }
 
-sf::CircleShape* Player::getPlayerForm()
+sf::RectangleShape* Player::getPlayerForm()
 {
     return playerForm;
 }
@@ -47,22 +47,22 @@ void Player::update(float deltaTime)
 {
     playerForm->move(dir.x * getSpeed() * deltaTime, dir.y * getSpeed() * deltaTime);
     
-    if (playerForm->getPosition().x < playerForm->getOrigin().x * playerForm->getScale().x)
+    if (playerForm->getPosition().x < playerForm->getSize().x * playerForm->getScale().x / 2)
     {
-        playerForm->setPosition(playerForm->getOrigin().x * playerForm->getScale().x, playerForm->getPosition().y);
+        playerForm->setPosition(playerForm->getSize().x * playerForm->getScale().x / 2, playerForm->getPosition().y);
     }
-    else if (playerForm->getPosition().x > 1900)
+    else if (playerForm->getPosition().x > 1920 - playerForm->getSize().x * playerForm->getScale().x / 2)
     {
-        playerForm->setPosition(1900, playerForm->getPosition().y);
+        playerForm->setPosition(1920 - playerForm->getSize().x * playerForm->getScale().x / 2, playerForm->getPosition().y);
     }
 
-    if (playerForm->getPosition().y < playerForm->getRadius() * playerForm->getScale().y / 2)
+    if (playerForm->getPosition().y < playerForm->getSize().y * playerForm->getScale().y / 2)
     {
-        playerForm->setPosition(playerForm->getPosition().x, playerForm->getRadius() * playerForm->getScale().y / 2);
+        playerForm->setPosition(playerForm->getPosition().x, playerForm->getSize().y * playerForm->getScale().y / 2);
     }
-    else if (playerForm->getPosition().y > 1080 - 40)
+    else if (playerForm->getPosition().y > 1080 - playerForm->getSize().y * playerForm->getScale().y / 2)
     {
-        playerForm->setPosition(playerForm->getPosition().x, 1080 - 40);
+        playerForm->setPosition(playerForm->getPosition().x, 1080 - playerForm->getSize().y * playerForm->getScale().y / 2);
     }
         
 }
