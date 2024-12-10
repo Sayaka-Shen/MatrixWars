@@ -4,21 +4,21 @@
 class Player
 {
 private:
-    sf::CircleShape* playerForm;
+    sf::RectangleShape* playerForm;
     int playerId;
     float playerSpeed;
     sf::Vector2f dir;
     
 public:
     // Constructor
-    Player(sf::CircleShape* playerFORM, int playerID, float playerSPEED);
+    Player(sf::RectangleShape   * playerFORM, int playerID, float playerSPEED);
 
     // Destructor
     ~Player();
 
     // Get for the id player and the form of the player which are private 
     int getId();
-    sf::CircleShape* getPlayerForm();
+    sf::RectangleShape* getPlayerForm();
     float getSpeed();
 
     // Function to draw the form and to move the player

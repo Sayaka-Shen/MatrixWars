@@ -6,12 +6,13 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Matrix Wars");
 
     // Create the player shapes and the player
-    sf::CircleShape* playerShape = new sf::CircleShape(80, 4);
+    //sf::CircleShape* playerShape = new sf::CircleShape(80, 16);
+    sf::RectangleShape* playerShape = new sf::RectangleShape(sf::Vector2f(80, 80));
     playerShape->setFillColor(sf::Color::Red);
     playerShape->setPosition(sf::Vector2f(200, 200));
-    playerShape->setOrigin(playerShape->getRadius() / 2, playerShape->getRadius() / 2);
+    playerShape->setOrigin(playerShape->getSize().x / 2, playerShape->getSize().y / 2);
     playerShape->setScale(0.5, 0.5);
-    playerShape->setRotation(45);
+    //playerShape->setRotation(45);
 
     Player player(playerShape, 1, 500);
 
