@@ -37,19 +37,19 @@ int main()
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         {
-            player.setDir({0, -1});
+            player.setDir(player.getDir() + sf::Vector2f(0, -1));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            player.setDir({0, 1});
+            player.setDir(player.getDir() + sf::Vector2f(0, 1));
         } 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         {
-            player.setDir({-1, 0});
+            player.setDir(player.getDir() + sf::Vector2f(-1, 0));
         } 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            player.setDir({1, 0});
+            player.setDir(player.getDir() + sf::Vector2f(1, 0));
         }
 
         player.update(deltaTime);

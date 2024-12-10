@@ -34,6 +34,12 @@ float Player::getSpeed()
     return playerSpeed;
 }
 
+sf::Vector2f Player::getDir()
+{
+    return dir;
+}
+
+
 // Move and Draw Functions
 void Player::draw(sf::RenderWindow& window)
 {
@@ -45,6 +51,14 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::update(float deltaTime)
 {
+    if (dir.x != 0 || dir.y != 0)
+    {
+        float mag = setMagnitude(dir);
+
+        dir.x /= mag;
+        dir.y /= mag;
+    }
+    
     playerForm->move(dir.x * getSpeed() * deltaTime, dir.y * getSpeed() * deltaTime);
     
     if (playerForm->getPosition().x < playerForm->getSize().x * playerForm->getScale().x / 2)
@@ -71,5 +85,11 @@ void Player::setDir(sf::Vector2f _dir)
 {
     dir = _dir;
 }
+
+float Player::setMagnitude(sf::Vector2f dir)
+{
+    return sqrt((dir.x * dir.x) + (dir.y * dir.y));
+}
+
 
 
