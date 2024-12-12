@@ -11,7 +11,7 @@ private:
     
 public:
     // Constructor
-    Player(sf::RectangleShape   * playerFORM, int playerID, float playerSPEED);
+    Player(sf::RectangleShape* playerFORM, int playerID, float playerSPEED);
 
     // Destructor
     ~Player();
