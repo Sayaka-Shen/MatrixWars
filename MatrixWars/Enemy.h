@@ -1,4 +1,3 @@
-// Enemy.h
 #pragma once
 #include <SFML/Graphics.hpp>
 
@@ -18,8 +17,9 @@ public:
 
     // Move and Draw Functions
     void draw(sf::RenderWindow& window);
-    void update(float deltaTime, sf::RectangleShape* playerForm); // Ajout du deuxième argument
+    void update(float deltaTime, sf::RectangleShape* playerForm);
     void setDir(sf::Vector2f _dir);
+    bool isDefeated(); // Ajout de la méthode isDefeated
 
 private:
     sf::RectangleShape* enemyForm;

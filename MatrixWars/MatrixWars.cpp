@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "Enemy.h" // Inclure le fichier d'en-tête Enemy
+#include "WaveManager.h"
 #include "MathUtils.h"
+#include <SFML/Graphics.hpp>
+#include <iostream> // Pour afficher les messages d'erreur
 
 int main()
 {
@@ -15,14 +18,23 @@ int main()
 
     Player player(playerShape, 1, 500);
 
-    // Create the enemy shapes and the enemy
-    sf::RectangleShape* enemyShape = new sf::RectangleShape(sf::Vector2f(80, 80));
-    enemyShape->setFillColor(sf::Color::Green);
-    enemyShape->setPosition(sf::Vector2f(400, 400));
-    enemyShape->setOrigin(enemyShape->getSize().x / 2, enemyShape->getSize().y / 2);
-    enemyShape->setScale(0.5, 0.5);
+    // Create the wave manager
+    WaveManager waveManager(5, 2.0f, 10.0f); // Initial wave size of 5 enemies, spawn interval of 2 seconds, wave duration of 10 seconds
 
-    Enemy enemy(enemyShape, 1, 300);
+    // Load font
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf"))
+    {
+        std::cerr << "Error loading font" << std::endl;
+        return -1; // Quitter le programme si la police ne peut pas être chargée
+    }
+
+    // Create text to display the current wave
+    sf::Text waveText;
+    waveText.setFont(font);
+    waveText.setCharacterSize(50); // Augmenter la taille du texte
+    waveText.setFillColor(sf::Color::White);
+    waveText.setStyle(sf::Text::Bold); // Rendre le texte en gras
 
     // Time management
     sf::Clock clock;
@@ -61,12 +73,20 @@ int main()
         }
 
         player.update(deltaTime);
-        enemy.update(deltaTime, player.getPlayerForm()); // Mettre à jour l'ennemi avec la forme du joueur
+        waveManager.update(deltaTime, player.getPlayerForm()); // Mettre à jour les ennemis avec la forme du joueur
+
+        // Update wave text
+        waveText.setString("Wave: " + std::to_string(waveManager.getCurrentWave()));
+        // Center the text at the top of the screen
+        sf::FloatRect textRect = waveText.getLocalBounds();
+        waveText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+        waveText.setPosition(sf::Vector2f(window.getSize().x / 2.0f, textRect.height + 10)); // Ajuster la position pour qu'il soit visible
 
         // Classic command
         window.clear();
         player.draw(window);
-        enemy.draw(window); // Dessiner l'ennemi
+        waveManager.draw(window); // Dessiner les ennemis
+        window.draw(waveText); // Dessiner le texte de la vague
         window.display();
     }
 }

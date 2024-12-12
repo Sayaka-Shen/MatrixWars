@@ -95,3 +95,10 @@ bool Enemy::checkCollision(sf::RectangleShape* other)
 {
     return enemyForm->getGlobalBounds().intersects(other->getGlobalBounds());
 }
+
+bool Enemy::isDefeated()
+{
+    // Implémentez la logique pour déterminer si l'ennemi est éliminé
+    // Par exemple, vous pouvez vérifier si l'ennemi a été touché par un projectile
+    return false; // Remplacez par la condition réelle
+}
