@@ -20,11 +20,9 @@ public:
     int getId();
     sf::RectangleShape* getPlayerForm();
     float getSpeed();
-    sf::Vector2f getDir();
 
     // Function to draw the form and to move the player
     void draw(sf::RenderWindow& window);
     void update(float deltaTime);
     void setDir(sf::Vector2f dir);
-    float setMagnitude(sf::Vector2f dir);
 };
