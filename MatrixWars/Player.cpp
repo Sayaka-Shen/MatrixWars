@@ -39,6 +39,8 @@ float Player::getSpeed()
     return playerSpeed;
 }
 
+//null
+
 sf::Vector2f Player::getDir()
 {
     return dir;
