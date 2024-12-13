@@ -1,12 +1,4 @@
-﻿  WaveManager.cpp
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,64): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,64): warning C4244:         with
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,64): warning C4244:         [
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,64): warning C4244:             T=float
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,64): warning C4244:         ]
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,49): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,49): warning C4244:         with
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,49): warning C4244:         [
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,49): warning C4244:             T=float
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\WaveManager.cpp(55,49): warning C4244:         ]
+﻿  Player.cpp
+C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\Player.cpp(37,28): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\Player.cpp(103,31): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
   MatrixWars.vcxproj -> C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\x64\Debug\MatrixWars.exe

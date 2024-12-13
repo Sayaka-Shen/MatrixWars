@@ -1,4 +1,5 @@
 ﻿#include "Player.h"
+#include <iostream>
 
 // Constructor
 Player::Player(sf::RectangleShape* playerFORM, int playerID, float playerSPEED)
@@ -31,7 +32,21 @@ sf::RectangleShape* Player::getPlayerForm()
 
 float Player::getSpeed()
 {
+    if (Player::getDir().x == 0 || Player::getDir().y == 0)
+    {
+        return playerSpeed * sqrt(2);
+    }
     return playerSpeed;
+}
+
+sf::Vector2f Player::getDir()
+{
+    return dir;
+}
+
+sf::Vector2f Player::getLastDir()
+{
+    return lastDir;
 }
 
 // Move and Draw Functions
@@ -39,14 +54,17 @@ void Player::draw(sf::RenderWindow& window)
 {
     if (playerForm)
     {
+        std::cout << playerForm->getPosition().x << std::endl;
         window.draw(*playerForm);
     }
 }
 
 void Player::update(float deltaTime)
 {
+    Player::setSpeed();
+
     playerForm->move(dir.x * getSpeed() * deltaTime, dir.y * getSpeed() * deltaTime);
-    
+
     if (playerForm->getPosition().x < playerForm->getSize().x * playerForm->getScale().x / 2)
     {
         playerForm->setPosition(playerForm->getSize().x * playerForm->getScale().x / 2, playerForm->getPosition().y);
@@ -64,12 +82,30 @@ void Player::update(float deltaTime)
     {
         playerForm->setPosition(playerForm->getPosition().x, 1080 - playerForm->getSize().y * playerForm->getScale().y / 2);
     }
-        
 }
 
 void Player::setDir(sf::Vector2f _dir)
 {
     dir = _dir;
+    if (dir != sf::Vector2f{ 0, 0 })
+    {
+        lastDir = dir;
+    }
+}
+
+void Player::setSpeed()
+{
+    playerSpeed = Player::getSpeed();
+}
+
+void Player::setSpeedDiagonal()
+{
+    playerSpeed = playerSpeed * sqrt(2);
+}
+
+void Player::setSpeedOrthogonal()
+{
+    playerSpeed = playerSpeed * playerSpeed;
 }
 
 

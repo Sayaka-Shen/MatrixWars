@@ -2,6 +2,7 @@
 #include "Enemy.h" // Inclure le fichier d'en-tête Enemy
 #include "WaveManager.h"
 #include "MathUtils.h"
+#include "bulletManager.h"
 #include <SFML/Graphics.hpp>
 #include <iostream> // Pour afficher les messages d'erreur
 
@@ -36,44 +37,53 @@ int main()
     waveText.setFillColor(sf::Color::White);
     waveText.setStyle(sf::Text::Bold); // Rendre le texte en gras
 
+    // Create the Bullet Manager
+    bulletManager bulletManager(20.0f, 50.0f);
+
     // Time management
     sf::Clock clock;
-    
+
     while (window.isOpen())
     {
         sf::Event event;
-        
+
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
                 window.close();
             }
+            //Shooting
+            if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::A)
+            {
+                bulletManager.AddBullet(playerShape->getPosition(), player.getLastDir());
+            }
         }
-        
+
         // Movement Management 
         float deltaTime = clock.restart().asSeconds();
-        player.setDir({0, 0});
-        
+        player.setDir({ 0, 0 });
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         {
-            player.setDir({0, -1});
+            player.setDir({ player.getDir().x, -1 });
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            player.setDir({0, 1});
-        } 
+            player.setDir({ player.getDir().x, 1 });
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         {
-            player.setDir({-1, 0});
-        } 
+            player.setDir({ -1, player.getDir().y });
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            player.setDir({1, 0});
+            player.setDir({ 1, player.getDir().y });
         }
 
         player.update(deltaTime);
         waveManager.update(deltaTime, player.getPlayerForm()); // Mettre à jour les ennemis avec la forme du joueur
+        //bulletManager.moveBullets(deltaTime);
 
         // Update wave text
         waveText.setString("Wave: " + std::to_string(waveManager.getCurrentWave()));
@@ -86,6 +96,7 @@ int main()
         window.clear();
         player.draw(window);
         waveManager.draw(window); // Dessiner les ennemis
+        //bulletManager.DrawBullets(window); // Dessiner les balles
         window.draw(waveText); // Dessiner le texte de la vague
         window.display();
     }
