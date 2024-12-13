@@ -1,4 +1,2 @@
-﻿  Player.cpp
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\Player.cpp(37,28): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
-C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\MatrixWars\Player.cpp(103,31): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+﻿  MatrixWars.cpp
   MatrixWars.vcxproj -> C:\Users\jacqu\OneDrive - De Vinci\Bureau\code.unity\MatrixWars\x64\Debug\MatrixWars.exe

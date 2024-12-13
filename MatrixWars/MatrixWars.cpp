@@ -83,7 +83,7 @@ int main()
 
         player.update(deltaTime);
         waveManager.update(deltaTime, player.getPlayerForm()); // Mettre à jour les ennemis avec la forme du joueur
-        //bulletManager.moveBullets(deltaTime);
+        bulletManager.moveBullets(deltaTime);
 
         // Update wave text
         waveText.setString("Wave: " + std::to_string(waveManager.getCurrentWave()));
@@ -96,7 +96,7 @@ int main()
         window.clear();
         player.draw(window);
         waveManager.draw(window); // Dessiner les ennemis
-        //bulletManager.DrawBullets(window); // Dessiner les balles
+        bulletManager.DrawBullets(window); // Dessiner les balles
         window.draw(waveText); // Dessiner le texte de la vague
         window.display();
     }

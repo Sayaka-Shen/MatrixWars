@@ -54,14 +54,13 @@ void Player::draw(sf::RenderWindow& window)
 {
     if (playerForm)
     {
-        std::cout << playerForm->getPosition().x << std::endl;
         window.draw(*playerForm);
     }
 }
 
 void Player::update(float deltaTime)
 {
-    Player::setSpeed();
+    //Player::setSpeed();
 
     playerForm->move(dir.x * getSpeed() * deltaTime, dir.y * getSpeed() * deltaTime);
 
