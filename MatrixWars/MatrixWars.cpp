@@ -17,7 +17,7 @@ int main()
     playerShape->setOrigin(playerShape->getSize().x / 2, playerShape->getSize().y / 2);
     playerShape->setScale(0.5, 0.5);
 
-    Player player(playerShape, 1, 500);
+    Player player(playerShape, 1, 250);
 
     // Create the wave manager
     WaveManager waveManager(5, 2.0f, 10.0f); // Initial wave size of 5 enemies, spawn interval of 2 seconds, wave duration of 10 seconds

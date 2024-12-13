@@ -25,7 +25,7 @@ void WaveManager::update(float deltaTime, sf::RectangleShape* playerForm, sf::Ci
     removeDefeatedEnemies(bullets);
 
     // Check if all enemies are defeated or if the wave duration has elapsed
-    if (allEnemiesDefeated() || timeSinceWaveStart >= waveDuration)
+    if (allEnemiesDefeated())
     {
         startNextWave();
     }
@@ -83,22 +83,10 @@ void WaveManager::spawnEnemy()
     enemyShape->setOrigin(enemyShape->getSize().x / 2, enemyShape->getSize().y / 2);
     enemyShape->setScale(0.5, 0.5);
 
-    Enemy* enemy = new Enemy(enemyShape, enemiesSpawned, 300);
+    Enemy* enemy = new Enemy(enemyShape, enemiesSpawned, 350);
     enemies.push_back(enemy);
 }
-//
-//void WaveManager::removeDefeatedEnemies()
-//{
-//    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* enemy) {
-//        // Supposons que l'ennemi a une méthode isDefeated() pour vérifier s'il est éliminé
-//        bool defeated = enemy->isDefeated();
-//        if (defeated)
-//        {
-//            delete enemy;
-//        }
-//        return defeated;
-//    }), enemies.end());
-//}
+
 
 
 
