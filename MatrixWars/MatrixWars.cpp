@@ -8,7 +8,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Matrix Wars", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Matrix Wars", sf::Style::Fullscreen);
 
     // Create the player shapes and the player
     sf::RectangleShape* playerShape = new sf::RectangleShape(sf::Vector2f(80, 80));
