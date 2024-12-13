@@ -8,7 +8,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Matrix Wars", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Matrix Wars", sf::Style::Default);
 
     // Create the player shapes and the player
     sf::RectangleShape* playerShape = new sf::RectangleShape(sf::Vector2f(80, 80));
@@ -81,7 +81,7 @@ int main()
             player.setDir({ 1, player.getDir().y });
         }
 
-        player.update(deltaTime);
+        player.update(deltaTime, waveManager.getEnemyForms());
         waveManager.update(deltaTime, player.getPlayerForm(), bulletManager.getBulletShape(), bulletManager.getBullets()); // Mettre à jour les ennemis avec la forme du joueur
         bulletManager.moveBullets(deltaTime);
 

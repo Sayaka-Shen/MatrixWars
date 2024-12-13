@@ -83,7 +83,7 @@ void Enemy::update(float deltaTime, sf::RectangleShape* playerForm, sf::CircleSh
     if (checkCollision(playerForm))
     {
         // Gestion de la collision (par exemple, arrêter le mouvement ou ajuster la position)
-        enemyForm->move(-dir.x * getSpeed() * deltaTime, -dir.y * getSpeed() * deltaTime);
+        //enemyForm->move(-dir.x * getSpeed() * deltaTime, -dir.y * getSpeed() * deltaTime);
     }
     
 }
@@ -108,7 +108,6 @@ bool Enemy::isDefeated(sf::CircleShape* bullet)
 {
     if (checkBulletCollision(bullet))
     {
-        std::cout << "Enemy defeated" << std::endl;
         markForDeletion();
         return true;
     }

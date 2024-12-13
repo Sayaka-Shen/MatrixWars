@@ -83,7 +83,7 @@ void WaveManager::spawnEnemy()
     enemyShape->setOrigin(enemyShape->getSize().x / 2, enemyShape->getSize().y / 2);
     enemyShape->setScale(0.5, 0.5);
 
-    Enemy* enemy = new Enemy(enemyShape, enemiesSpawned, 350);
+    Enemy* enemy = new Enemy(enemyShape, enemiesSpawned, 300);
     enemies.push_back(enemy);
 }
 
@@ -98,4 +98,12 @@ bool WaveManager::allEnemiesDefeated()
 int WaveManager::getCurrentWave() const
 {
     return currentWave;
+}
+
+std::vector<sf::RectangleShape*> WaveManager::getEnemyForms() {
+    std::vector<sf::RectangleShape*> enemyForms;
+    for (auto& enemy : enemies) {
+        enemyForms.push_back(enemy->getEnemyForm());
+    }
+    return enemyForms;
 }

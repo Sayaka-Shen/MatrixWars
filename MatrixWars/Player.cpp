@@ -58,9 +58,9 @@ void Player::draw(sf::RenderWindow& window)
     }
 }
 
-void Player::update(float deltaTime)
+void Player::update(float deltaTime, const std::vector<sf::RectangleShape*>& enemyForms)
 {
-    //Player::setSpeed();
+    
 
     playerForm->move(dir.x * getSpeed() * deltaTime, dir.y * getSpeed() * deltaTime);
 
@@ -81,6 +81,28 @@ void Player::update(float deltaTime)
     {
         playerForm->setPosition(playerForm->getPosition().x, 1080 - playerForm->getSize().y * playerForm->getScale().y / 2);
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::B))
+    {
+		std::cout << "break" << std::endl;
+    }
+    for (auto enemyForm : enemyForms) {
+        if (checkPlayerCollision(enemyForm)) {
+			std::cout << "Player defeated" << std::endl;
+			markForDeletion();
+            break;
+        }
+    }
+    
+    removePlayer();
+}
+
+void Player::removePlayer() {
+	if (Player::isToBeDeleted())
+	{
+		std::cout << "Player deleted" << std::endl;
+		delete playerForm;
+		playerForm = nullptr;
+	}
 }
 
 void Player::setDir(sf::Vector2f _dir)
@@ -107,4 +129,19 @@ void Player::setSpeedOrthogonal()
     playerSpeed = playerSpeed * playerSpeed;
 }
 
+bool Player::checkPlayerCollision(sf::RectangleShape* other)
+{
+    return Player::getPlayerForm()->getGlobalBounds().intersects(other->getGlobalBounds());
+}
 
+bool Player::isDefeated(sf::RectangleShape* enemy)
+{
+    if (Player::checkPlayerCollision(enemy))
+    {
+        std::cout << "Player defeated" << std::endl;
+        markForDeletion();
+        return true;
+    }
+
+    return false;
+}

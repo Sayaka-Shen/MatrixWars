@@ -1,12 +1,2 @@
-﻿  WaveManager.cpp
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,64): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,64): warning C4244:         with
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,64): warning C4244:         [
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,64): warning C4244:             T=float
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,64): warning C4244:         ]
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,49): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,49): warning C4244:         with
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,49): warning C4244:         [
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,49): warning C4244:             T=float
-C:\repos\MatrixWars\MatrixWars\MatrixWars\WaveManager.cpp(82,49): warning C4244:         ]
+﻿  Enemy.cpp
   MatrixWars.vcxproj -> C:\repos\MatrixWars\MatrixWars\x64\Debug\MatrixWars.exe

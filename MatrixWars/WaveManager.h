@@ -12,6 +12,7 @@ public:
     void draw(sf::RenderWindow& window);
     void startNextWave();
     int getCurrentWave() const; // Ajout de la méthode getCurrentWave
+    std::vector<sf::RectangleShape*> getEnemyForms();
 
 private:
     std::vector<Enemy*> enemies;
@@ -24,6 +25,6 @@ private:
     float timeSinceWaveStart; // Temps écoulé depuis le début de la vague
 
     void spawnEnemy();
-    void removeDefeatedEnemies();
+    //void removeDefeatedEnemies(std::vector<sf::CircleShape>& bullets);
     bool allEnemiesDefeated();
 };

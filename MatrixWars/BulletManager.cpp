@@ -36,7 +36,6 @@ void bulletManager::AddBullet(sf::Vector2f position, sf::Vector2f dir) {
 void bulletManager::DrawBullets(sf::RenderWindow& window) {
     for (const auto& bullet : bullets)
     {
-		std::cout << "drawing bullet" << std::endl;
         window.draw(bullet);
     }
 }
