@@ -14,6 +14,8 @@ public:
     ~bulletManager();
 
     int getBulletNumber();
+    sf::CircleShape* getBulletShape();
+	std::vector<sf::CircleShape>& getBullets() { return bullets; }
 
     void AddBullet(sf::Vector2f position, sf::Vector2f dir);
     void DrawBullets(sf::RenderWindow& window);

@@ -38,7 +38,7 @@ int main()
     waveText.setStyle(sf::Text::Bold); // Rendre le texte en gras
 
     // Create the Bullet Manager
-    bulletManager bulletManager(20.0f, 50.0f);
+    bulletManager bulletManager(20.0f, 500);
 
     // Time management
     sf::Clock clock;
@@ -82,7 +82,7 @@ int main()
         }
 
         player.update(deltaTime);
-        waveManager.update(deltaTime, player.getPlayerForm()); // Mettre à jour les ennemis avec la forme du joueur
+        waveManager.update(deltaTime, player.getPlayerForm(), bulletManager.getBulletShape(), bulletManager.getBullets()); // Mettre à jour les ennemis avec la forme du joueur
         bulletManager.moveBullets(deltaTime);
 
         // Update wave text

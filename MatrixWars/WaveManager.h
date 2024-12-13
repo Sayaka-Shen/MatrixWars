@@ -7,7 +7,8 @@ class WaveManager
 {
 public:
     WaveManager(int initialWaveSize, float spawnInterval, float waveDuration);
-    void update(float deltaTime, sf::RectangleShape* playerForm);
+    void update(float deltaTime, sf::RectangleShape* playerForm, sf::CircleShape* bullet, std::vector<sf::CircleShape>& bullets);
+    void removeDefeatedEnemies(std::vector<sf::CircleShape>& bullets);
     void draw(sf::RenderWindow& window);
     void startNextWave();
     int getCurrentWave() const; // Ajout de la méthode getCurrentWave

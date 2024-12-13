@@ -17,15 +17,19 @@ public:
 
     // Move and Draw Functions
     void draw(sf::RenderWindow& window);
-    void update(float deltaTime, sf::RectangleShape* playerForm);
+    void update(float deltaTime, sf::RectangleShape* playerForm, sf::CircleShape* bullet);
     void setDir(sf::Vector2f _dir);
-    bool isDefeated(); // Ajout de la méthode isDefeated
+    bool isDefeated(sf::CircleShape* bullet); // Ajout de la méthode isDefeated
+	bool isToBeDeleted() { return toBeDeleted; }
+	void markForDeletion() { toBeDeleted = true; }
 
 private:
     sf::RectangleShape* enemyForm;
     int enemyId;
     float enemySpeed;
     sf::Vector2f dir;
+    bool toBeDeleted;
 
     bool checkCollision(sf::RectangleShape* other);
+	bool checkBulletCollision(sf::CircleShape* other);
 };

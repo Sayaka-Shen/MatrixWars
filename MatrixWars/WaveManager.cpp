@@ -5,7 +5,7 @@ WaveManager::WaveManager(int initialWaveSize, float spawnInterval, float waveDur
 {
 }
 
-void WaveManager::update(float deltaTime, sf::RectangleShape* playerForm)
+void WaveManager::update(float deltaTime, sf::RectangleShape* playerForm, sf::CircleShape* bullet, std::vector<sf::CircleShape>& bullets)
 {
     timeSinceLastSpawn += deltaTime;
     timeSinceWaveStart += deltaTime;
@@ -19,15 +19,42 @@ void WaveManager::update(float deltaTime, sf::RectangleShape* playerForm)
 
     for (auto& enemy : enemies)
     {
-        enemy->update(deltaTime, playerForm);
+        enemy->update(deltaTime, playerForm, bullet);
     }
 
-    removeDefeatedEnemies();
+    removeDefeatedEnemies(bullets);
 
     // Check if all enemies are defeated or if the wave duration has elapsed
     if (allEnemiesDefeated() || timeSinceWaveStart >= waveDuration)
     {
         startNextWave();
+    }
+    
+
+}
+
+void WaveManager::removeDefeatedEnemies(std::vector<sf::CircleShape>& bullets)
+{
+    for (auto it = enemies.begin(); it != enemies.end();)
+    {
+        bool enemyDefeated = false;
+        for (auto& bullet : bullets)
+        {
+            if ((*it)->isDefeated(&bullet))
+            {
+                enemyDefeated = true;
+                break;
+            }
+        }
+        if (enemyDefeated || (*it)->isToBeDeleted())
+        {
+            delete* it;
+            it = enemies.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
     }
 }
 
@@ -59,19 +86,21 @@ void WaveManager::spawnEnemy()
     Enemy* enemy = new Enemy(enemyShape, enemiesSpawned, 300);
     enemies.push_back(enemy);
 }
+//
+//void WaveManager::removeDefeatedEnemies()
+//{
+//    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* enemy) {
+//        // Supposons que l'ennemi a une méthode isDefeated() pour vérifier s'il est éliminé
+//        bool defeated = enemy->isDefeated();
+//        if (defeated)
+//        {
+//            delete enemy;
+//        }
+//        return defeated;
+//    }), enemies.end());
+//}
 
-void WaveManager::removeDefeatedEnemies()
-{
-    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* enemy) {
-        // Supposons que l'ennemi a une méthode isDefeated() pour vérifier s'il est éliminé
-        bool defeated = enemy->isDefeated();
-        if (defeated)
-        {
-            delete enemy;
-        }
-        return defeated;
-    }), enemies.end());
-}
+
 
 bool WaveManager::allEnemiesDefeated()
 {
