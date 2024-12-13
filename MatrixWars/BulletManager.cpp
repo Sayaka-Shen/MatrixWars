@@ -16,6 +16,14 @@ int bulletManager::getBulletNumber() {
     return bullets.size();
 }
 
+sf::CircleShape* bulletManager::getBulletShape() {
+    if (!bullets.empty())
+    {
+        return &bullets[0];
+    }
+	return nullptr;
+}
+
 void bulletManager::AddBullet(sf::Vector2f position, sf::Vector2f dir) {
     sf::CircleShape bullet(size, 3);
     bullet.setPosition(position);
@@ -28,7 +36,6 @@ void bulletManager::AddBullet(sf::Vector2f position, sf::Vector2f dir) {
 void bulletManager::DrawBullets(sf::RenderWindow& window) {
     for (const auto& bullet : bullets)
     {
-		std::cout << "drawing bullet" << std::endl;
         window.draw(bullet);
     }
 }

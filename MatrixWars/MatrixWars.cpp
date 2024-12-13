@@ -8,7 +8,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Matrix Wars", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Matrix Wars", sf::Style::Default);
 
     // Create the player shapes and the player
     sf::RectangleShape* playerShape = new sf::RectangleShape(sf::Vector2f(80, 80));
@@ -17,7 +17,7 @@ int main()
     playerShape->setOrigin(playerShape->getSize().x / 2, playerShape->getSize().y / 2);
     playerShape->setScale(0.5, 0.5);
 
-    Player player(playerShape, 1, 500);
+    Player player(playerShape, 1, 250);
 
     // Create the wave manager
     WaveManager waveManager(5, 2.0f, 10.0f); // Initial wave size of 5 enemies, spawn interval of 2 seconds, wave duration of 10 seconds
@@ -38,7 +38,7 @@ int main()
     waveText.setStyle(sf::Text::Bold); // Rendre le texte en gras
 
     // Create the Bullet Manager
-    bulletManager bulletManager(20.0f, 50.0f);
+    bulletManager bulletManager(20.0f, 500);
 
     // Time management
     sf::Clock clock;
@@ -81,8 +81,8 @@ int main()
             player.setDir({ 1, player.getDir().y });
         }
 
-        player.update(deltaTime);
-        waveManager.update(deltaTime, player.getPlayerForm()); // Mettre à jour les ennemis avec la forme du joueur
+        player.update(deltaTime, waveManager.getEnemyForms());
+        waveManager.update(deltaTime, player.getPlayerForm(), bulletManager.getBulletShape(), bulletManager.getBullets()); // Mettre à jour les ennemis avec la forme du joueur
         bulletManager.moveBullets(deltaTime);
 
         // Update wave text

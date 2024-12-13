@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include <iostream>
 
 // Constructor
 Enemy::Enemy(sf::RectangleShape* enemyFORM, int enemyID, float enemySPEED)
@@ -43,7 +44,7 @@ void Enemy::draw(sf::RenderWindow& window)
     }
 }
 
-void Enemy::update(float deltaTime, sf::RectangleShape* playerForm)
+void Enemy::update(float deltaTime, sf::RectangleShape* playerForm, sf::CircleShape* bullet)
 {
     // Mise à jour de la direction de l'ennemi pour se déplacer vers le joueur
     sf::Vector2f playerPos = playerForm->getPosition();
@@ -82,8 +83,9 @@ void Enemy::update(float deltaTime, sf::RectangleShape* playerForm)
     if (checkCollision(playerForm))
     {
         // Gestion de la collision (par exemple, arrêter le mouvement ou ajuster la position)
-        enemyForm->move(-dir.x * getSpeed() * deltaTime, -dir.y * getSpeed() * deltaTime);
+        //enemyForm->move(-dir.x * getSpeed() * deltaTime, -dir.y * getSpeed() * deltaTime);
     }
+    
 }
 
 void Enemy::setDir(sf::Vector2f _dir)
@@ -96,9 +98,19 @@ bool Enemy::checkCollision(sf::RectangleShape* other)
     return enemyForm->getGlobalBounds().intersects(other->getGlobalBounds());
 }
 
-bool Enemy::isDefeated()
+bool Enemy::checkBulletCollision(sf::CircleShape* other)
 {
-    // Implémentez la logique pour déterminer si l'ennemi est éliminé
-    // Par exemple, vous pouvez vérifier si l'ennemi a été touché par un projectile
-    return false; // Remplacez par la condition réelle
+    return enemyForm->getGlobalBounds().intersects(other->getGlobalBounds());
+}
+
+
+bool Enemy::isDefeated(sf::CircleShape* bullet)
+{
+    if (checkBulletCollision(bullet))
+    {
+        markForDeletion();
+        return true;
+    }
+
+    return false;
 }
